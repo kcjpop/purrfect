@@ -1,0 +1,149 @@
+---
+import Icon from "@/components/primitives/Icon.astro";
+import Logo from "@/components/primitives/Logo.astro";
+---
+
+<footer class="flow flow-3xl">
+  <div class="content flow flow-xl">
+    <div class="info">
+      <Logo variant="monochrome" />
+
+      <p>
+        Sed viverra eget fames sit varius. Pellentesque mattis libero viverra
+        dictumst ornaresed justo convallis vitae.
+      </p>
+
+      <ul role="list" class="social">
+        <li>
+          <a href="/" class="link">
+            <span class="visually-hidden">Facebook</span>
+            <Icon icon="facebook" />
+          </a>
+        </li>
+        <li>
+          <a href="/" class="link">
+            <span class="visually-hidden">Instagram</span>
+            <Icon icon="instagram" />
+          </a>
+        </li>
+        <li>
+          <a href="/" class="link">
+            <span class="visually-hidden">X (formerly Twitter)</span>
+            <Icon icon="twitter" />
+          </a>
+        </li>
+        <li>
+          <a href="/" class="link">
+            <span class="visually-hidden">Youtube</span>
+            <Icon icon="youtube" />
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="company-links">
+      <div class="flow flow-s">
+        <h3>Company</h3>
+        <ul role="list" class="flow flow-s">
+          <li><a href="/">About us</a></li>
+          <li><a href="/">Blog</a></li>
+          <li><a href="/">Careers</a></li>
+        </ul>
+      </div>
+
+      <div class="flow flow-s">
+        <h3>Useful Links</h3>
+        <ul role="list" class="flow flow-s">
+          <li><a href="/">Most Popular</a></li>
+          <li><a href="/">F.A.Q</a></li>
+        </ul>
+      </div>
+
+      <div class="flow flow-s">
+        <h3>Customer Service</h3>
+        <ul role="list" class="flow flow-s">
+          <li><a href="/">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <p class="text-center copyright">
+    © Copyright Purrfect breeds 2025. Design by Verda Cloud Oy.
+  </p>
+</footer>
+
+<style>
+  :where(footer) {
+    padding: var(--space-3xl) var(--space-m);
+
+    @media (width >= 60rem) {
+      padding: var(--space-3xl);
+    }
+
+    background:
+      url("/images/paws.svg"), url("/images/blob3.svg"), var(--gradient-primary);
+    background-repeat: no-repeat, no-repeat, no-repeat;
+    background-position:
+      0 0,
+      right bottom,
+      0 0;
+  }
+
+  .content {
+    display: grid;
+    justify-content: center;
+
+    text-align: center;
+
+    @media (width >= 60rem) {
+      display: flex;
+      text-align: left;
+    }
+  }
+
+  .info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-l);
+    align-items: center;
+
+    max-width: 350px;
+    margin-inline: auto;
+
+    @media (width >= 60rem) {
+      align-items: start;
+      margin-inline-start: 0;
+    }
+
+    & .social {
+      display: flex;
+      gap: var(--space-ml);
+
+      & .link {
+        font-size: var(--font-size-2xl);
+      }
+    }
+  }
+
+  .company-links {
+    display: inline-flex;
+    gap: var(--space-3xl);
+    flex-wrap: wrap;
+    justify-content: center;
+
+    & h3 {
+      font-weight: 600;
+      line-height: 1;
+    }
+
+    & a {
+      text-decoration: none;
+    }
+  }
+
+  .copyright {
+    color: rgba(from var(--color-text-normal) r g b / 50%);
+    font-size: var(--font-size-s);
+  }
+</style>

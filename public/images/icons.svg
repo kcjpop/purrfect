@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+
+	<symbol id="chevron-right">
+		<path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+	</symbol>
+
+	<symbol id="chevron-left">
+		<path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+	</symbol>
+
+	<symbol id="arrow-right">
+  	<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7.332 12h9.333M12 7.333 16.667 12 12 16.667"/>
+	</symbol>
+
+	<symbol id="hambuger">
+  	<path fill="currentColor" d="M28 0H0v2h28V0ZM28 9H0v2h28V9ZM28 18H0v2h28v-2Z"/>
+	</symbol>
+
+	<symbol id="search" transform="translate(2 2)">
+  	<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.369 14.445a5.08 5.08 0 1 0 0-10.16 5.08 5.08 0 0 0 0 10.16ZM15.715 15.715l-2.762-2.762"/>
+	</symbol>
+
+	<symbol id="heart">
+	  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.291 2.612a5.5 5.5 0 0 0-7.78 0l-1.06 1.06-1.06-1.06a5.501 5.501 0 0 0-7.78 7.78l1.06 1.06 7.78 7.78 7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78Z"/>
+	</symbol>
+
+  <symbol id="facebook">
+		<path fill="currentColor" d="M23.992 12c0 6.061-4.491 11.072-10.326 11.885a12.153 12.153 0 0 1-3.591-.038C4.363 22.927 0 17.973 0 12 0 5.373 5.371 0 11.997 0c6.625 0 11.997 5.373 11.997 12h-.002Z"/>
+		<path fill="url(#a)" d="M13.666 9.636v2.614H16.9l-.512 3.521h-2.72v8.114a12.17 12.17 0 0 1-3.593-.038V15.77H7.093v-3.52h2.981v-3.2a3.593 3.593 0 0 1 3.593-3.593v.002l.017-.002H16.9v3.045h-2.101c-.625 0-1.132.507-1.132 1.132Z"/>
+  </symbol>
+
+	<symbol id="instagram">
+		<path fill="currentColor" d="M12.024 0h-.055C5.36 0 0 5.36 0 11.973v.054C0 18.64 5.359 24 11.97 24h.054c6.61 0 11.969-5.36 11.969-11.973v-.054C23.993 5.36 18.634 0 12.023 0Z"/>
+		<path fill="url(#a)" d="M15.708 4.883H8.284a3.724 3.724 0 0 0-3.72 3.72v6.794a3.724 3.724 0 0 0 3.72 3.72h7.424a3.724 3.724 0 0 0 3.72-3.72V8.603a3.724 3.724 0 0 0-3.72-3.72Zm-9.831 3.72a2.41 2.41 0 0 1 2.407-2.408h7.424a2.41 2.41 0 0 1 2.408 2.408v6.794a2.41 2.41 0 0 1-2.408 2.408H8.284a2.41 2.41 0 0 1-2.407-2.408V8.603Z"/>
+		<path fill="url(#a)" d="M11.996 15.46a3.464 3.464 0 0 0 3.46-3.46 3.464 3.464 0 0 0-3.46-3.461 3.464 3.464 0 0 0-3.46 3.46 3.464 3.464 0 0 0 3.46 3.461Zm0-5.608A2.15 2.15 0 0 1 14.144 12a2.15 2.15 0 0 1-2.148 2.149A2.15 2.15 0 0 1 9.848 12a2.15 2.15 0 0 1 2.148-2.148Z"/>
+		<path fill="url(#a)" d="M15.776 9.098a.933.933 0 0 0 0-1.865.933.933 0 0 0 0 1.865Z"/>
+	</symbol>
+
+	<symbol id="twitter">
+		<path fill="currentColor" d="M23.992 12c0 6.061-4.491 11.072-10.326 11.885a12.153 12.153 0 0 1-3.591-.038C4.363 22.927 0 17.973 0 12 0 5.373 5.371 0 11.997 0c6.625 0 11.997 5.373 11.997 12h-.002Z"/>
+		<path fill="url(#a)" d="m4.865 5.293 5.532 7.4-5.567 6.016h1.253l4.875-5.267 3.938 5.267h4.264l-5.843-7.816 5.182-5.6h-1.253l-4.49 4.85-3.626-4.85H4.865Zm1.842.923h1.959l8.65 11.57h-1.958l-8.65-11.57Z"/>
+	</symbol>
+
+	<symbol id="youtube">
+		<path fill="currentColor" d="M23.993 12c0-6.627-5.371-12-11.996-12C5.37 0 0 5.373 0 12s5.371 12 11.996 12c6.626 0 11.997-5.373 11.997-12Z"/>
+		<path fill="url(#a)" d="M19.55 9.513c-.094-.911-.297-1.919-1.045-2.448-.58-.411-1.34-.426-2.051-.425l-4.507.003-4.335.004c-.604 0-1.19-.046-1.75.215-.482.225-.86.651-1.086 1.126-.314.66-.38 1.408-.418 2.138a34.65 34.65 0 0 0 .021 3.992c.062.97.218 2.042.967 2.66.664.547 1.602.574 2.463.575l8.206.007c.35 0 .716-.006 1.074-.045.703-.076 1.373-.277 1.825-.799.456-.525.573-1.256.642-1.948.169-1.68.167-3.376-.006-5.055Zm-9.185 4.841v-4.71L14.442 12l-4.077 2.355Z"/>
+	</symbol>
+
+  <defs>
+	  <linearGradient id="a" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F87537"/>
+      <stop offset="1" stop-color="#FBA81F"/>
+    </linearGradient>
+  </defs>
+</svg>
+

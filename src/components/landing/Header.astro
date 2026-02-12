@@ -1,0 +1,253 @@
+---
+import Button from "@/components/primitives/Button.astro";
+import Input from "@/components/primitives/Input.astro";
+import Icon from "@/components/primitives/Icon.astro";
+import Logo from "@/components/primitives/Logo.astro";
+---
+
+<header>
+  <nav>
+    <a class="visually-hidden skip-link" href="#main">Skip to content</a>
+
+    <a href="">
+      <Logo />
+    </a>
+
+    <ul role="list" class="links">
+      <li>
+        <a href="/" aria-current="page">Home</a>
+      </li>
+      <li>
+        <a href="/">About Us</a>
+      </li>
+      <li>
+        <a href="/">Contact</a>
+      </li>
+    </ul>
+
+    <div class="actions">
+      <search>
+        <form action="" class="form-search">
+          <label for="navbar-search-field">
+            <span class="visually-hidden">Search products…</span>
+
+            <Input
+              variant="secondary"
+              type="search"
+              name="keyword"
+              id="navbar-search-field"
+              placeholder="Search products…"
+            >
+              <Button
+                slot="after"
+                type="submit"
+                shape="circle"
+                class="btn-search"
+              >
+                <span class="visually-hidden">Search</span>
+                <Icon icon="search" />
+              </Button>
+            </Input>
+          </label>
+        </form>
+      </search>
+
+      <Button variant="icon" class="btn-favourites">
+        <span class="visually-hidden">Favourites</span>
+        <Icon icon="heart" />
+
+        <span class="badge">0</span>
+      </Button>
+    </div>
+
+    <Button variant="icon" class="btn-menu">
+      <span class="visually-hidden">Menu</span>
+      <Icon icon="hambuger" />
+    </Button>
+  </nav>
+
+  <section class="hero flow flow-2xl">
+    <div class="headline flow flow-l">
+      <h1>Purrfect Breeds</h1>
+      <h2>Find the breed that matches your vibe.</h2>
+    </div>
+
+    <p>
+      Sociis blandit et pellentesque aliquet at quisque tortor lacinia nullam.
+      Mattis aenean scelerisque dui libero
+    </p>
+
+    <a href="#breed-explorer" class="btn-cta">Explore breeds</a>
+  </section>
+</header>
+
+<style>
+  .skip-link {
+    position: fixed;
+    top: 1ch;
+    left: 1ch;
+
+    background: var(--color-text-faith);
+    padding: var(--space-xs);
+  }
+
+  header {
+    --hero-height: 767px;
+    height: var(--hero-height);
+
+    padding: var(--space-m);
+
+    @media (width >= 60rem) {
+      padding-block-start: var(--space-l);
+      padding-inline: var(--space-2xl);
+    }
+
+    background:
+      url("/images/blob.svg"), url("/images/blob2.svg"),
+      url("/images/hero.webp");
+    background-size: auto, auto, cover;
+    background-repeat: no-repeat, no-repeat, no-repeat;
+    background-position:
+      left 148px top 0,
+      left 518px bottom 0,
+      top left;
+
+    display: flex;
+    flex-direction: column;
+  }
+
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background-color: var(--color-bg-tertiary);
+    padding: var(--space-m) var(--space-xl);
+    border-radius: var(--radius-pill);
+
+    box-shadow: var(--shadow-1);
+
+    & .links {
+      display: none;
+
+      @media (width >= 60rem) {
+        display: flex;
+        gap: var(--space-l);
+      }
+
+      & :is(a) {
+        text-decoration: none;
+        display: inline-block;
+        padding: var(--space-2xs) var(--space-s);
+
+        color: var(--color-text-normal);
+        font-weight: 500;
+
+        &[aria-current="page"] {
+          color: var(--color-ui-active);
+          border-block-end: 2px solid var(--color-ui-active);
+        }
+      }
+    }
+  }
+
+  .actions {
+    display: none;
+
+    @media (width >= 60rem) {
+      display: flex;
+      align-items: center;
+      gap: var(--space-l);
+    }
+
+    .btn-favourites {
+      width: var(--space-l);
+      font-size: var(--font-size-2xl);
+    }
+
+    .badge {
+      --width: var(--space-s);
+
+      background-color: var(--color-primary);
+      color: var(--color-text-faith);
+      font-size: var(--font-size-2xs);
+
+      width: var(--width);
+      aspect-ratio: 1;
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      border-radius: var(--radius-circle);
+
+      position: absolute;
+      top: calc(-1 * var(--width) / 2);
+      right: calc(-1 * var(--width) / 2);
+    }
+  }
+
+  .btn-menu {
+    --color: var(--color-primary);
+
+    width: 2.5rem;
+    font-size: var(--font-size-2xl);
+
+    @media (width >= 60rem) {
+      display: none;
+    }
+  }
+
+  .form-search {
+    max-width: 280px;
+
+    & .btn-search {
+      width: 1.75rem;
+      font-size: var(--font-size-2xl);
+    }
+  }
+
+  .hero {
+    --width: 600px;
+
+    flex: 1;
+    align-content: center;
+
+    padding-inline: var(--space-m);
+
+    @media (width >= 60rem) {
+      max-width: var(--width);
+      padding-inline: var(--space-2xl);
+    }
+
+    .headline {
+      & h1 {
+        font-family: var(--font-secondary);
+        font-weight: 700;
+        font-size: var(--font-size-m);
+
+        color: var(--color-text-faith);
+      }
+
+      & h2 {
+        font-weight: 700;
+        font-size: var(--font-size-6xl);
+        line-height: 110%;
+      }
+    }
+  }
+
+  .btn-cta {
+    display: inline-block;
+
+    padding: var(--space-l) var(--space-xl);
+    background: var(--color-bg-primary);
+    color: var(--color-text-faith);
+    border-radius: var(--radius-pill);
+
+    text-decoration: none;
+
+    font-weight: 600;
+    font-size: var(--font-size-xl);
+  }
+</style>

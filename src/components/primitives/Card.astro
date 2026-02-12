@@ -1,0 +1,35 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"article"> {
+  cover?: string;
+}
+
+const { cover, ...rest } = Astro.props;
+---
+
+<article class:list={["card", rest.class]} {...rest}>
+  {cover && <img src={cover} alt="" class="cover" />}
+
+  <div class="content">
+    <slot />
+  </div>
+</article>
+
+<style>
+  .card {
+    --radius: var(--radius-l);
+
+    background-color: var(--gray-100);
+    border-radius: var(--radius);
+  }
+
+  .cover {
+    border-start-start-radius: var(--radius);
+    border-start-end-radius: var(--radius);
+  }
+
+  .content {
+    padding: 1.25em var(--space-m);
+  }
+</style>

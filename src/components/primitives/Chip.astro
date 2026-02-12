@@ -1,0 +1,23 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+type Props = HTMLAttributes<"span">;
+---
+
+<span class="chip" {...Astro.props}>
+  <slot />
+</span>
+
+<style>
+  .chip {
+    display: inline-block;
+
+    color: var(--azure-47);
+    padding: var(--space-2xs) var(--space-s);
+    font-family: var(--font-secondary);
+    font-size: var(--font-size-s);
+
+    border: 1px solid var(--gray-91);
+    border-radius: var(--radius-pill);
+  }
+</style>

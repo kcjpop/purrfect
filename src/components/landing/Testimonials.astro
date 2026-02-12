@@ -1,0 +1,286 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import Button from "@/components/primitives/Button.astro";
+import Icon from "@/components/primitives/Icon.astro";
+
+type Props = HTMLAttributes<"section">;
+
+const { id } = Astro.props;
+---
+
+<section {id} class="flow flow-3xl">
+  <div class="text-center">
+    <h2 id="testimonials-header">What people say</h2>
+  </div>
+
+  <div
+    role="region"
+    aria-roledescription="carousel"
+    aria-labelledby="testimonials-header"
+  >
+    <ul class="testimonial-list" id="testimonial-list">
+      <li class="testimonial flow flow-s active">
+        <blockquote>
+          <p>
+            I never knew there were so many types of T-Rex cats! Found my dream
+            pet.
+          </p>
+        </blockquote>
+        <p class="author">— Sarah Jenkins</p>
+      </li>
+
+      <li class="testimonial flow flow-s">
+        <blockquote>
+          <p>
+            The favorites feature helped me narrow down my choices with my
+            partner. I like cats with big ears.
+          </p>
+        </blockquote>
+        <p class="author">— Mike T.</p>
+      </li>
+
+      <li class="testimonial flow flow-s">
+        <blockquote>
+          <p>
+            Clean, fast, and simply purrfect. Love the design! Have been chasing
+            a cat for a long time
+          </p>
+        </blockquote>
+        <p class="author">— Jerry M.</p>
+      </li>
+
+      <li class="testimonial flow flow-s">
+        <blockquote>
+          <p>
+            Clean, fast, and simply purrfect. Love the design! Have been chasing
+            a cat for a long time
+          </p>
+        </blockquote>
+        <p class="author">— Jerry M.</p>
+      </li>
+
+      <li class="testimonial flow flow-s">
+        <blockquote>
+          <p>
+            Clean, fast, and simply purrfect. Love the design! Have been chasing
+            a cat for a long time
+          </p>
+        </blockquote>
+        <p class="author">— Jerry M.</p>
+      </li>
+
+      <li class="testimonial flow flow-s">
+        <blockquote>
+          <p>
+            Clean, fast, and simply purrfect. Love the design! Have been chasing
+            a cat for a long time
+          </p>
+        </blockquote>
+        <p class="author">— Jerry M.</p>
+      </li>
+    </ul>
+  </div>
+
+  <div class="nav">
+    <Button variant="primary" shape="circle" class="btn-nav" id="btn-prev">
+      <span class="visually-hidden">Previous comment</span>
+      <Icon icon="chevron-left" />
+    </Button>
+    <Button variant="primary" shape="circle" class="btn-nav" id="btn-next">
+      <span class="visually-hidden">Next comment</span>
+      <Icon icon="chevron-right" />
+    </Button>
+  </div>
+</section>
+
+<style>
+  section {
+    padding: var(--space-3xl) var(--space-m);
+
+    @media (width >= 60rem) {
+      padding: var(--space-3xl);
+    }
+  }
+
+  h2 {
+    font-size: var(--font-size-4xl);
+    font-weight: 600;
+  }
+
+  blockquote {
+    :first-child:before {
+      content: "“";
+    }
+
+    :last-child::after {
+      content: "”";
+    }
+
+    font-style: italic;
+    line-height: 110%;
+    font-size: var(--font-size-xl);
+  }
+
+  .testimonial-list {
+    --testimonial-size: 255px;
+    @media (width >= 60rem) {
+      --testimonial-size: 320px;
+    }
+
+    padding-block: var(--space-xl);
+    display: flex;
+    gap: var(--space-l);
+
+    position: relative;
+    container-type: inline-size;
+    overflow-x: auto;
+
+    scroll-snap-type: inline mandatory;
+    scroll-behavior: smooth;
+    overscroll-behavior-inline: contain;
+
+    & > * {
+      min-width: var(--testimonial-size);
+      scroll-snap-align: center;
+    }
+  }
+
+  .testimonial {
+    background-color: var(--gray-100);
+    border: 1px solid var(--gray-100);
+    border-radius: var(--radius-ml);
+    box-shadow: var(--shadow-2);
+    padding: var(--space-l);
+
+    @media (prefers-reduced-motion: no-preference) {
+      transition: transform 0.3s ease-in-out;
+    }
+
+    &.active {
+      transform: scale(1.124);
+    }
+  }
+
+  .author {
+    font-weight: 600;
+    line-height: 20px;
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    gap: 2.5rem;
+
+    font-size: var(--font-size-2xl);
+
+    & .btn-nav {
+      width: 2.5rem;
+    }
+  }
+</style>
+
+<script>
+  handleCarousel();
+
+  function handleCarousel() {
+    const carousel = document.getElementById("testimonial-list");
+    if (carousel == null) {
+      return;
+    }
+
+    const observations = setupObservation(carousel);
+
+    const goToPrev = goTo(
+      carousel,
+      observations,
+      (el) =>
+        el.previousElementSibling ??
+        carousel.querySelector(".testimonial:last-child"),
+    );
+
+    const goToNext = goTo(
+      carousel,
+      observations,
+      (el) =>
+        el.nextElementSibling ??
+        carousel.querySelector(".testimonial:first-child"),
+    );
+
+    const btnPrev = document.getElementById("btn-prev");
+    const btnNext = document.getElementById("btn-next");
+
+    btnPrev?.addEventListener("click", goToPrev);
+    btnNext?.addEventListener("click", goToNext);
+
+    /**
+     * Handle keyboard navigation when focusing on the carousel.
+     */
+    carousel.addEventListener("keydown", (e) => {
+      e.preventDefault();
+
+      if (e.key === "ArrowRight" || e.key === "ArrowDown") {
+        goToNext();
+      }
+      if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
+        goToPrev();
+      }
+    });
+  }
+
+  /**
+   * Observe carousel's children to check if they're visible in the viewport
+   * and scroll to active child if needed.
+   */
+  function setupObservation(carousel: HTMLElement) {
+    const nodeObservation = new Map<Element, IntersectionObserverEntry>();
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          nodeObservation.set(entry.target, entry);
+        }
+      },
+      { threshold: 0.1 },
+    );
+    for (const slide of carousel.children) {
+      observer.observe(slide);
+    }
+
+    return nodeObservation;
+  }
+
+  /**
+   * Handler generator to go to next/prev slide
+   */
+  function goTo(
+    carousel: HTMLElement,
+    observations: Map<Element, IntersectionObserverEntry>,
+    targetQuery: (el: Element) => Element | null,
+  ) {
+    return () => {
+      const current = carousel.querySelector(".active");
+      if (!current) {
+        return;
+      }
+
+      const target = targetQuery(current);
+
+      if (target != null) {
+        current.classList.remove("active");
+        target.classList.add("active");
+
+        /**
+         * Check if the target node is fully visible. If not, scroll into
+         * view.
+         */
+        const intersection = observations.get(target);
+        if (intersection && intersection.intersectionRatio < 1) {
+          carousel.scrollTo(
+            intersection.intersectionRect.x,
+            intersection.intersectionRect.y,
+          );
+        }
+      }
+    };
+  }
+</script>

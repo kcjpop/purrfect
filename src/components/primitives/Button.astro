@@ -1,0 +1,76 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"button"> {
+  shape?: "default" | "pill" | "circle";
+  variant?: "primary" | "secondary" | "tertiary" | "gradient" | "icon";
+}
+
+const {
+  type = "button",
+  shape = "default",
+  variant = "primary",
+  ...rest
+} = Astro.props;
+---
+
+<button data-shape={shape} data-variant={variant} {type} {...rest}>
+  <slot />
+</button>
+
+<style>
+  :where(button) {
+    color: var(--color-text-faith);
+    background-color: var(--color-bg-primary);
+    font-weight: 600;
+    line-height: 1;
+    position: relative;
+
+    &[data-variant="secondary"] {
+      color: var(--color-text-normal);
+      background-color: var(--gray-94);
+      font-weight: 400;
+
+      border: 1px solid var(--gray-91);
+      padding: var(--space-s) var(--space-l);
+    }
+
+    &[data-variant="gradient"] {
+      padding: var(--space-s) var(--space-xl);
+
+      background: var(--gradient-primary);
+      color: var(--color-text-normal);
+
+      font-size: var(--font-size-xl);
+      font-weight: 600;
+    }
+
+    &[data-variant="tertiary"] {
+      background: var(--color-bg-tertiary);
+      color: var(--color-text-primary);
+    }
+
+    &[data-variant="icon"] {
+      aspect-ratio: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      background: none;
+      color: var(--color, var(--color-text-normal));
+    }
+
+    &[data-shape="pill"] {
+      border-radius: var(--radius-pill);
+    }
+
+    &[data-shape="circle"] {
+      border-radius: var(--radius-circle);
+      aspect-ratio: 1;
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+</style>

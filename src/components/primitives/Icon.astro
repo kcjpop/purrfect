@@ -1,0 +1,31 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"svg"> {
+  icon:
+    | "chevron-right"
+    | "chevron-left"
+    | "arrow-right"
+    | "hambuger"
+    | "search"
+    | "heart"
+    | "facebook"
+    | "instagram"
+    | "twitter"
+    | "youtube";
+}
+
+const { width = "1em", height = "1em", icon, ...rest } = Astro.props;
+---
+
+<svg
+  aria-hidden="true"
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 24 24"
+  fill="none"
+  {width}
+  {height}
+  {...rest}
+>
+  <use xlink:href={`/images/icons.svg#${icon}`}></use>
+</svg>

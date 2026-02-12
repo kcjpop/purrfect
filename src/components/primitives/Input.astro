@@ -1,0 +1,59 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"input"> {
+  variant?: "primary" | "secondary" | "tertiary";
+}
+
+const { variant = "primary", ...rest } = Astro.props;
+---
+
+<div class="wrapper" data-variant={variant}>
+  <slot name="before" />
+  <input type="text" {...rest} />
+  <slot name="after" />
+</div>
+
+<style>
+  .wrapper {
+    --radius: var(--radius-pill);
+
+    border: 1px solid var(--gray-91);
+    border-radius: var(--radius);
+
+    display: inline-flex;
+    gap: var(--space-xs);
+    padding: var(--space-s) var(--space-m);
+
+    &:has([slot="after"]) {
+      padding: var(--space-xs);
+
+      & :where(input) {
+        padding-inline-start: var(--space-m);
+      }
+    }
+
+    &[data-variant="secondary"] {
+      border: none;
+      background-color: var(--gray-100);
+    }
+
+    &:has(:focus-within) {
+      outline: var(--focus-ring-width) solid var(--focus-ring-color);
+    }
+
+    & :where(input) {
+      flex: 1;
+      width: 100%;
+
+      border: none;
+      background: none;
+      box-shadow: none;
+
+      &:focus-visible {
+        /* Remove default focus ring on input as the wrapper already handled that */
+        outline: none;
+      }
+    }
+  }
+</style>

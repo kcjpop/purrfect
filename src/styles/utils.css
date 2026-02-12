@@ -1,0 +1,29 @@
+.flow > * + * {
+  margin-block-start: var(--flow-space, 1em);
+}
+
+.flow-s {
+  --flow-space: var(--space-s);
+}
+.flow-m {
+  --flow-space: var(--space-m);
+}
+.flow-ml {
+  --flow-space: var(--space-ml);
+}
+.flow-l {
+  --flow-space: var(--space-l);
+}
+.flow-xl {
+  --flow-space: var(--space-xl);
+}
+.flow-2xl {
+  --flow-space: var(--space-2xl);
+}
+.flow-3xl {
+  --flow-space: var(--space-3xl);
+}
+
+.text-center {
+  text-align: center;
+}

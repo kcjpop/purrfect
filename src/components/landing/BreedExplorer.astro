@@ -1,0 +1,286 @@
+---
+import { getCollection } from "astro:content";
+
+import { getDataUrl } from "@/data/breed.ts";
+import Button from "@/components/primitives/Button.astro";
+import Card from "@/components/primitives/Card.astro";
+import Chip from "@/components/primitives/Chip.astro";
+import Icon from "@/components/primitives/Icon.astro";
+import Input from "@/components/primitives/Input.astro";
+
+const { id } = Astro.props;
+const breeds = await getCollection("breeds");
+---
+
+<section
+  {id}
+  class="wrapper flow flow-3xl"
+  aria-labelledby="breed-explorer-header"
+>
+  <div class="header">
+    <h2 id="breed-explorer-header">Breed Explorer</h2>
+
+    <search>
+      <form action="#" class="form">
+        <label for="breed-explorer-keyword">
+          <span class="visually-hidden">Search breeds…</span>
+          <Input
+            type="search"
+            name="keyword"
+            id="breed-explorer-keyword"
+            placeholder="Search breeds…"
+          />
+        </label>
+
+        <Button type="button" shape="pill" variant="secondary">
+          Filter by Coat
+        </Button>
+      </form>
+    </search>
+  </div>
+
+  <ul role="list" class="card-grid" id="list-breeds">
+    {
+      breeds.map(({ data: breed }) => {
+        return (
+          <li data-breed={breed.breed}>
+            <a href="/">
+              <Card cover="/images/breed.webp">
+                <div class="card-content">
+                  <div class="flow flow-s">
+                    <h3 data-name>{breed.breed}</h3>
+
+                    <ul role="list" class="chips">
+                      <li>
+                        <Chip data-country>{breed.country}</Chip>
+                      </li>
+                      <li>
+                        <Chip data-coat>{breed.coat}</Chip>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <span class="icon-see-more">
+                    <Icon icon="arrow-right" />
+                  </span>
+                </div>
+              </Card>
+            </a>
+          </li>
+        );
+      })
+    }
+  </ul>
+
+  <template id="template-breed-card">
+    <li data-breed="">
+      <a href="/">
+        <Card cover="/images/breed.webp">
+          <div class="card-content">
+            <div class="flow flow-s">
+              <h3 data-name></h3>
+
+              <ul role="list" class="chips">
+                <li>
+                  <Chip data-country />
+                </li>
+                <li>
+                  <Chip data-coat />
+                </li>
+              </ul>
+            </div>
+
+            <span class="icon-see-more">
+              <Icon icon="arrow-right" />
+            </span>
+          </div>
+        </Card>
+      </a>
+    </li>
+  </template>
+
+  <div class="text-center">
+    <Button
+      id="btn-load-more"
+      data-current-page={2}
+      variant="gradient"
+      shape="pill">Load more</Button
+    >
+  </div>
+</section>
+
+<style>
+  .wrapper {
+    padding: var(--space-3xl) var(--space-m);
+
+    @media (width >= 60rem) {
+      padding: var(--space-3xl);
+    }
+  }
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--space-m);
+
+    & h2 {
+      font-size: var(--font-size-4xl);
+      font-weight: 600;
+    }
+  }
+
+  .form {
+    display: flex;
+    gap: var(--space-m);
+    flex-wrap: wrap;
+  }
+
+  .card-grid {
+    --card-size: 282px;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(var(--card-size), 1fr));
+    gap: var(--space-l);
+
+    & :where(a) {
+      text-decoration: none;
+    }
+
+    .card-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-xs);
+    }
+
+    .icon-see-more {
+      font-size: var(--font-size-2xl);
+      width: var(--space-l);
+      background: var(--color-bg-tertiary);
+      color: var(--color-text-primary);
+      border-radius: var(--radius-circle);
+    }
+  }
+</style>
+
+<script>
+  import { getDataUrl } from "@/data/breed";
+
+  /**
+   * Helper function to set text content of a DOM node
+   */
+  const setNodeContent = (node: HTMLElement | null, content: string) => {
+    if (node) {
+      node.textContent = content;
+    }
+  };
+
+  const listCards = document.getElementById("list-breeds");
+  if (listCards) {
+    handleLoadMore(listCards);
+    handleSearchBreeds(listCards);
+  }
+
+  /**
+   * Handle loading more breeds.
+   */
+  function handleLoadMore(listCards: HTMLElement) {
+    const templateNewCard = document.getElementById(
+      "template-breed-card",
+    ) as HTMLTemplateElement;
+    const btnLoadMore = document.getElementById(
+      "btn-load-more",
+    ) as HTMLButtonElement;
+
+    if (btnLoadMore && templateNewCard) {
+      btnLoadMore.addEventListener("click", async function () {
+        const { currentPage } = this.dataset;
+
+        if (currentPage) {
+          try {
+            const page = Number(currentPage);
+            this.textContent = "Loading…";
+
+            /**
+             * Unfortunately `next_page_url` returned from API didn't include
+             * `limit` search params, so we need to construct the URL manually.
+             */
+            const url = getDataUrl(page);
+            const res = await fetch(url).then((res) => res.json());
+
+            for (const item of res.data) {
+              const newCard = document.importNode(
+                templateNewCard.content,
+                true,
+              );
+              const li = newCard.querySelector("[data-breed]") as HTMLLIElement;
+              if (li) {
+                li.dataset.breed = item.breed;
+              }
+
+              setNodeContent(newCard.querySelector("[data-name]"), item.breed);
+              setNodeContent(
+                newCard.querySelector("[data-country]"),
+                item.country,
+              );
+              setNodeContent(newCard.querySelector("[data-coat]"), item.coat);
+
+              listCards?.appendChild(newCard);
+            }
+
+            /**
+             * If there is a next page, prepare data for loading. Otherwise, hide
+             * Load More button.
+             */
+            if (res.next_page_url !== null) {
+              this.dataset.currentPage = `${page + 1}`;
+              this.textContent = "Load more";
+            } else {
+              this.setAttribute("hidden", "");
+            }
+          } catch (err) {
+            console.error(err);
+          }
+        }
+      });
+    }
+  }
+
+  /**
+   * Search for breeds by name case-insensitively.
+   */
+  function handleSearchBreeds(listCards: HTMLElement) {
+    const inputField = document.getElementById(
+      "breed-explorer-keyword",
+    ) as HTMLInputElement;
+
+    if (!inputField) return;
+
+    inputField.addEventListener("input", function () {
+      const keyword = this.value;
+      const matched = listCards.querySelectorAll(
+        `[data-breed*="${keyword}" i]`,
+      );
+
+      if (keyword.length > 0 && matched.length > 0) {
+        for (const item of listCards.children) {
+          item.setAttribute("hidden", "");
+        }
+
+        for (const item of matched) {
+          item.removeAttribute("hidden");
+        }
+      } else {
+        for (const item of listCards.children) {
+          item.removeAttribute("hidden");
+        }
+      }
+    });
+  }
+</script>

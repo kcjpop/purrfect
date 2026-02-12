@@ -1,0 +1,66 @@
+:root {
+  --font-primary: "Poppins", sans-serif;
+  --font-secondary: "Inter", sans-serif;
+
+  --font-size-2xs: 0.625rem; /* 10px */
+  --font-size-xs: 0.75rem; /* 12px */
+  --font-size-s: 0.875rem; /* 14px */
+  --font-size-m: 1rem;
+  --font-size-l: 1.1rem;
+  --font-size-xl: 1.25rem; /* 20px */
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 2rem;
+  --font-size-4xl: 2.5rem;
+  --font-size-5xl: 3rem;
+  --font-size-6xl: 3.375rem;
+
+  --azure-47: #64748b;
+
+  --gray-91: #e2e8f0;
+  --gray-94: #efefef;
+  --gray-98: #f8fafc;
+  --gray-100: #f8f9fa;
+
+  --color-primary: #f87537;
+  --color-secondary: #fba81f;
+
+  --gradient-primary: linear-gradient(
+    45deg,
+    var(--color-primary) 0%,
+    var(--color-secondary) 100%
+  );
+
+  --color-text-normal: #000;
+  --color-text-faith: #fff;
+  --color-text-primary: var(--color-primary);
+
+  --color-ui-active: var(--color-primary);
+
+  --color-bg-primary: #090706;
+  --color-bg-secondary: var(--gray-100);
+  --color-bg-tertiary: #fff;
+
+  --focus-ring-width: 3px;
+  --focus-ring-color: currentColor;
+
+  --space-2xs: 0.25rem; /* 4px */
+  --space-xs: 0.5rem; /* 8px */
+  --space-s: 0.75rem; /* 12px */
+  --space-m: 1rem; /* 16px */
+  --space-ml: 1.25rem; /* 20px */
+  --space-l: 1.5rem; /* 24px */
+  --space-xl: 2.25rem; /* 36px */
+  --space-2xl: 3rem; /* 48px */
+  --space-3xl: 3.75rem; /* 60px */
+
+  --line-height-half: 1.5;
+  --line-height-double: 2;
+
+  --radius-ml: var(--space-ml);
+  --radius-l: var(--space-l);
+  --radius-circle: 100%;
+  --radius-pill: 999em;
+
+  --shadow-1: 0px 16px 12px rgba(0, 0, 0, 0.03);
+  --shadow-2: 12px 12px 12px rgb(from var(--color-primary) r g b / 0.12);
+}
